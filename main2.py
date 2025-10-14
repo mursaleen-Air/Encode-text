@@ -9,17 +9,10 @@ from cryptography.hazmat.backends import default_backend
 
 st.set_page_config(page_title="Secure Text Encryptor (AES-GCM)", page_icon="🔐", layout="centered")
 st.title("🔐 Secure Text Encryptor / Decryptor")
-st.write(
-    """
-    Encrypt text with AES-GCM using a password-derived key.
-    Paste the resulting Base64 ciphertext into WhatsApp.
-    The recipient must use the same password to decrypt.
-    """
-)
 
 mode = st.radio("Mode", ("Encrypt", "Decrypt"), horizontal=True)
 
-text = st.text_area("Text (plaintext to encrypt or Base64 ciphertext to decrypt)", height=160)
+text = st.text_area("Text (plaintext to encrypt ciphertext to decrypt)", height=160)
 password = st.text_input("Password (shared secret) — must be identical for sender and receiver", type="password")
 # optional: show/hide salt display
 use_custom_salt = st.checkbox("Provide custom salt (advanced)", value=False)
@@ -100,4 +93,5 @@ if st.button("Run"):
                     st.info("Check that the ciphertext and password are correct and that ciphertext is complete.")
         except Exception as e:
             st.error(f"Error: {str(e)}")
+
 
